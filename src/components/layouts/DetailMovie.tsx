@@ -55,7 +55,7 @@ const DetailMovie = () => {
                 <div
                   className="mx-auto w-[300px] h-[400px]"
                   style={{
-                    backgroundImage: `url(${movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : '/image/notfound.png'})`,
+                    backgroundImage: `url(${movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : '/image/img-notfound.png'})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundColor: 'white'
