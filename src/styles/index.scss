@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@font-face {
+    font-family: 'Netflix Sans';
+    src: url('https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Netflix Sans", sans-serif;
+    background-color: black;
+    border: none;
+    
+}
+
+footer {
+    font-family: "Plus Jakarta Sans";
+}
+
+
+.kontener {
+    width: 100%;
+}
+
+.hero {
+    background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(2 13 24)), url("./image/hero.jpg");
+    z-index: 1;
+    position: relative;
+    top: 0;
+    width: 100%;
+    min-height: 496px;
+    opacity: 1;
+}
+
+.curve {
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    
+    border-top: solid 5px red;
+    border-bottom: none;
+
+    background: radial-gradient(
+        50% 500% at 50% -420%, 
+        rgba(64, 97, 231, 0.4) 80%, 
+        rgba(0, 0, 0, 0.1) 100%
+    ), black;
+    box-shadow: none;    
+    height: 40px;
+    z-index: 2;
+}
+
+@media (min-width: 500px) {
+    .kontener {
+        max-width: 500px;
+    }
+}
+@media (min-width: 640px) {
+    .kontener {
+        max-width: 640px;
+    }
+}
+@media (min-width: 768px) {
+    .kontener {
+        max-width: 768px;
+    }
+}
+@media (min-width: 845px) {
+    .kontener {
+        max-width: 845px;
+    }
+}
+@media (min-width: 1024px) {
+    .kontener {
+        max-width: 900px;
+    }
+    .hero {
+        max-height: 100%;
+    }
+}
+@media (min-width: 1030px) {
+    .kontener {
+        max-width: 1070px;
+    }
+}
+
