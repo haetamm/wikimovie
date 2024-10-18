@@ -27,24 +27,30 @@ const DetailMovie = () => {
   };
 
   useEffect(() => {
-    const movies = sessionStorage.getItem("nowPlaying");
-    const moviesPopular = sessionStorage.getItem("popularMovieList");
-    const moviesFavorite = sessionStorage.getItem("favoriteMovie");
-    if (movies && moviesPopular && moviesFavorite) {
-      const movieParsed: movieDetail[] = JSON.parse(movies);
-      const moviePopularParsed: movieDetail[] = JSON.parse(moviesPopular);
-      const movieFavoriteParsed: movieDetail[] = JSON.parse(moviesFavorite);
-      const movieAll = [ ...movieParsed, ...moviePopularParsed, ...movieFavoriteParsed];
-
-      const selectedMovie = movieAll.find((movie) => movie.id === id);
-      
+    const getMoviesFromSession = (key: string): movieDetail[] => {
+      const data = sessionStorage.getItem(key);
+      return data ? JSON.parse(data) : [];
+    };
+  
+    const findMovieById = (movies: movieDetail[], id: number | null) => {
+      const selectedMovie = movies.find((movie) => movie.id === id);
       if (selectedMovie) {
         setMovie(selectedMovie); 
-        const genresString = getGenreNames(selectedMovie.genre_ids);
-        setMovieGenres(genresString); 
+        const genres = getGenreNames(selectedMovie.genre_ids);
+        setMovieGenres(genres);
       }
-    }
+    };
+  
+    const nowPlayingMovies = getMoviesFromSession("nowPlaying");
+    const popularMovies = getMoviesFromSession("popularMovieList");
+    const favoriteMovies = getMoviesFromSession("favoriteMovie");
+  
+    const allMovies = [...nowPlayingMovies, ...popularMovies, ...favoriteMovies];
+  
+    findMovieById(allMovies, id);
+  
   }, [id]);
+  
 
   return (
     <>
