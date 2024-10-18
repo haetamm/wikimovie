@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { RootState } from "../store";
 import { useEffect, useState } from "react";
-import { genres as genreList } from "../../utilities/genres";
+import { genres as genreList } from "../utilities/genres";
 
 interface movieDetail {
   id: number;
@@ -29,10 +29,12 @@ const DetailMovie = () => {
   useEffect(() => {
     const movies = sessionStorage.getItem("nowPlaying");
     const moviesPopular = sessionStorage.getItem("popularMovieList");
-    if (movies && moviesPopular) {
+    const moviesFavorite = sessionStorage.getItem("favoriteMovie");
+    if (movies && moviesPopular && moviesFavorite) {
       const movieParsed: movieDetail[] = JSON.parse(movies);
       const moviePopularParsed: movieDetail[] = JSON.parse(moviesPopular);
-      const movieAll = [ ...movieParsed, ...moviePopularParsed];
+      const movieFavoriteParsed: movieDetail[] = JSON.parse(moviesFavorite);
+      const movieAll = [ ...movieParsed, ...moviePopularParsed, ...movieFavoriteParsed];
 
       const selectedMovie = movieAll.find((movie) => movie.id === id);
       
@@ -43,7 +45,6 @@ const DetailMovie = () => {
       }
     }
   }, [id]);
-  console.log(movie?.title);
 
   return (
     <>

@@ -16,8 +16,8 @@ export const popularMovieList = createAsyncThunk(
     'popularMovie/popularMovieList',
     async (_, { rejectWithValue }) => {
       try {
-        const {data : response1 } = await axiosInstance.get('/popular?language=en-US&page=1');
-        const {data : response2 } = await axiosInstance.get('/popular?language=en-US&page=2');
+        const {data : response1 } = await axiosInstance.get('/movie/popular?language=en-US&page=1');
+        const {data : response2 } = await axiosInstance.get('/movie/popular?language=en-US&page=2');
         const { results: movies1 } = response1;
         const { results: movies2 } = response2;
         const resMovie2 = movies2.slice(0, 10);

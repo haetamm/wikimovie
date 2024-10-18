@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store";
-import { openModal } from "../../store/modalSlice";
+import { AppDispatch } from "../../../store";
+import { openModal } from "../../../store/modalSlice";
+import { sizeModal, typeModal } from "../../../utilities/constant";
 
 interface CardImageProps {
     poster_path: string;
@@ -14,9 +15,10 @@ const CardImage = ({ poster_path, id, activeIndex, setActiveIndex }: CardImagePr
 
   const handleOpenModal = (id: number) => {
     dispatch(openModal({
-      id,
-      type: "big",
-      isOpen: true
+      id: id,
+      type: typeModal.MOVIE,
+      isOpen: true,
+      size: sizeModal.BIG,
     }))
   }
   
@@ -26,7 +28,7 @@ const CardImage = ({ poster_path, id, activeIndex, setActiveIndex }: CardImagePr
         onClick={() => setActiveIndex(activeIndex === id ? null : id)}
         className="w-[200px] h-[300px] object-cover rounded-lg transition-transform duration-300"
         style={{
-          backgroundImage: `url(${poster_path})`,
+          backgroundImage: `url(${poster_path ? `https://image.tmdb.org/t/p/w342${poster_path}` : '/image/img-notfound.png'})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: 'white'

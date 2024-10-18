@@ -16,7 +16,7 @@ export const nowPlayingMovie = createAsyncThunk(
     'nowPlaying/nowPlayingMovie',
     async (_, { rejectWithValue }) => {
       try {
-        const {data : response } = await axiosInstance.get('/now_playing?language=en-US&page=1');
+        const {data : response } = await axiosInstance.get('/movie/now_playing?language=en-US&page=1');
         const { results: movie } = response;
         const result = movie.slice(0, 6);
         sessionStorage.setItem('nowPlaying', JSON.stringify(result));
