@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { movieCardProps } from "../../utilities/interface";
+import { movieCardProps } from "../utilities/helper";
 
 interface MovieCardProps {
   movie: movieCardProps;

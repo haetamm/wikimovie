@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { movieCardProps } from "../../../utilities/interface";
+import { movieCardProps } from "../../../utilities/helper";
 import CardImage from "./CardImage";
 
 interface MultiCarouselProps {

@@ -1,7 +1,7 @@
 import '../../../styles/components/list-image.scss';
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
-import { movieCardProps } from "../../../utilities/interface";
+import { movieCardProps } from "../../../utilities/helper";
 import { openModal } from "../../../store/modalSlice";
 import { sizeModal, typeModal } from "../../../utilities/constant";
 import MovieCard from "../../MovieCard";
