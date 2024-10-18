@@ -22,7 +22,6 @@ const FormLogin = () => {
     const onSubmit = handleSubmit(async (data) => {
         try {
             const { payload }  = await dispatch(loginUser(data));
-            console.log(payload);
             if (payload.success === false ) {
                 toast.error(payload.status_message);
                 return
@@ -65,10 +64,11 @@ const FormLogin = () => {
                     >
                         {loading ? 'Loading' : 'Login' }
                     </button>
+                    <p className="text-end mt-2 mb-0">Don't have an account? <a href="https://www.themoviedb.org/signup" target="_blank" className="hover:underline hover:text-red-700">Sign up</a></p>
                 </form>
             </div>
         </>
     )
 }
 
-export default FormLogin
+export default FormLogin;

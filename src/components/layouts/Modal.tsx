@@ -55,7 +55,7 @@ export default function Modal() {
                   <div className={`modal-card rounded-none lg:rounded-xl ${size !== sizeModal.SMALL ? 'besar-modal' : 'kecil-modal'}`}>
                     <div className="modal-card-kecil__body">
                         <div className="close-wrap flex justify-end">
-                            <div onClick={typeModal.LOGIN === type ?  () => back() : () => {closeModalHandle() }} className="close">&times;</div>
+                          <div onClick={typeModal.LOGIN === type ?  () => back() : () => {closeModalHandle() }} className="close">&times;</div>
                         </div>
                         { type === typeModal.MOVIE && size === sizeModal.BIG &&
                           <div className="besar-modal__wrap">

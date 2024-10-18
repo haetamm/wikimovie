@@ -1,91 +1,67 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../utilities/api-default";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
-import { openModal } from "../store/modalSlice";
-import { sizeModal, typeModal } from "../utilities/constant";
 import MovieCard from "../components/MovieCard";
+import { favoriteMovieList } from "../store/favoriteMovieSlice";
+import HeaderProfilePage from "../components/pages/profile/HeaderProfilePage";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { loading } = useSelector((state: RootState) => state.favoriteMovieList);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const { session_id } = useSelector((state: RootState) => state.user);
   const [movies, setMovies] = useState<any>([]);
   const [username, setUsername] = useState<string>("");
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  const handleOpenModal = (id: number) => {
-    dispatch(
-      openModal({
-        type: typeModal.MOVIE,
-        isOpen: true,
-        size: sizeModal.BIG,
-        id,
-      })
-    );
-  };
-
   const fetchMovie = async () => {
-    setLoading(true);
     try {
-      const { data: response } = await axiosInstance.get(`/account/null/favorite/movies?language=en-US&page=1&session_id=${session_id}&sort_by=created_at.asc`);
-      const { results: movies } = response;
-      sessionStorage.setItem('favoriteMovie', JSON.stringify(movies))
-      setMovies(movies);
+      const response = await dispatch(favoriteMovieList(session_id)).unwrap();
+      setMovies(response);
     } catch(err) {
       console.log(err);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
-
-  const fetchUser = async () => {
-    try {
-      const { data: responseUser } = await axiosInstance.get(`/account/13283213?session_id=${session_id}`);
-      const { username } = responseUser;
-      sessionStorage.setItem('name', JSON.stringify(username));
-      setUsername(username)
-    } catch(err) {
-      console.log(err)
-    }
-  }
 
   useEffect(() => {
     fetchMovie();
     const username = sessionStorage.getItem('name');
-    username ? setUsername(username) : fetchUser();
+    username ? setUsername(username) : setUsername('Profile');
   }, []);
 
   return (
-    <div className="">
-      <div className="kontener mx-auto flex-grow pt-[50px] px-4 xs:px-6  text-white h-56">
-        <div className="text-3xl lg:text-6xl font-bold">
-          Hallo, {username}
-        </div>
-        <div className="text-lg mt-6">
-          This is your profile page. You can view your favorite movies here
-        </div>
-      </div>
+    <>
+      <Helmet>
+          <title>{username} | WikiMovie</title>
+          <meta name='description' content='WikiMovie Profile Page' />
+      </Helmet>
+      <HeaderProfilePage />
       <div className="px-4 justify-center kontener mx-auto">
-      <hr className="border-red-700 border-4 border-dotted"/>
+        <hr className="border-red-700 border-4 border-dotted"/>
         <div className="w-full h-min-[400px] mt-5 list-image-wrap relative justify-center">
           {loading ? (
-            <div className="text-white">Loading...</div>
+            <div className="text-white text-center text-lg">Loading...</div>
           ) : movies.length > 0 ? (
-              movies.map((movie: any, index: number) => (
-                <MovieCard
-                  key={index}
-                  movie={movie}
-                  handleOpenModal={handleOpenModal}
-                />
-              ))
-
-          ) : (
-            <div>data not available</div>
+                movies.map((movie: any, index: number) => (
+                  <div key={index} className="relative h-min-[450px] m-3 mx-auto">
+                    <div
+                      className="relative w-[300px] h-[450px] xs:w-[260px] xs:h-[360px] md:w-[300px] md:h-[450px] group"
+                    >
+                      <MovieCard
+                        key={index}
+                        movie={movie}
+                        activeIndex={activeIndex}
+                        setActiveIndex={setActiveIndex}
+                      />
+                    </div>
+                  </div>
+                ))
+            ) : (
+            <div className="text-white text-center text-lg">data not available</div>
           )}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

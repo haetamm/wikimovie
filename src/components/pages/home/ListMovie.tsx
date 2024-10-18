@@ -1,10 +1,7 @@
 import '../../../styles/components/list-image.scss';
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../store";
 import { movieCardProps } from "../../../utilities/helper";
-import { openModal } from "../../../store/modalSlice";
-import { sizeModal, typeModal } from "../../../utilities/constant";
 import MovieCard from "../../MovieCard";
+import { useState } from 'react';
 
 interface ListMovieProps {
   moviesPopular: movieCardProps[];
@@ -12,18 +9,7 @@ interface ListMovieProps {
 }
 
 const ListMovie = ({ moviesPopular, setMoviesPopular }: ListMovieProps) => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  const handleOpenModal = (id: number) => {
-    dispatch(
-      openModal({
-        type: typeModal.MOVIE,
-        isOpen: true,
-        size: sizeModal.BIG,
-        id,
-      })
-    );
-  };
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const loadMore = () => {
     const movieList = sessionStorage.getItem("popularMovieList");
@@ -42,11 +28,18 @@ const ListMovie = ({ moviesPopular, setMoviesPopular }: ListMovieProps) => {
     <div className="px-4 justify-center">
       <div className="w-full list-image-wrap relative justify-center">
         {moviesPopular.map((movie, index) => (
-          <MovieCard
-            key={index}
-            movie={movie}
-            handleOpenModal={handleOpenModal}
-          />
+          <div key={index} className="relative h-min-[450px] m-3 mx-auto">
+            <div
+              className="relative w-[300px] h-[450px] xs:w-[260px] xs:h-[360px] md:w-[300px] md:h-[450px] group"
+            >
+              <MovieCard
+                key={index}
+                movie={movie}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
+              />
+            </div>
+          </div>
         ))}
       </div>
       {moviesPopular.length < 30 && (

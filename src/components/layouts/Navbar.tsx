@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Logo from "./Logo";
 import { sizeModal, typeModal, urlPage } from "../../utilities/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
@@ -24,7 +23,9 @@ const Navbar = () => {
         <div className="w-full bg-transaprent top-0">
             <div className="kontener mx-auto">
                 <div className="flex justify-between items-center h-[5.5rem] xl:px-0 relative px-5">                
-                    <Link to={urlPage.HOME}><Logo /></Link>
+                    <Link to={urlPage.HOME}>
+                        <img src="/image/logo.png" alt="logo" className="w-[89px] h-[30px] lg:h-[2.5rem] lg:w-[9.25rem]"/>
+                    </Link>
                     {!session_id && <Link to={urlPage.LOGIN} className=" py-1 rounded-md px-6 bg-red-700 text-white">Sign In</Link> }
                     {session_id && (
                         <div className="flex justify-end space-x-3">

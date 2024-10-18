@@ -1,5 +1,5 @@
 export const urlPage = {
-    "HOME": "/",
+    "HOME": "/discover",
     "LOGIN": "/login",
     "PROFILE": "/profile"
 }

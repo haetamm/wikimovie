@@ -4,6 +4,7 @@ import { openModal } from "../store/modalSlice";
 import { useEffect } from "react";
 import { sizeModal, typeModal } from "../utilities/constant";
 import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -28,9 +29,14 @@ const Login = () => {
         return <Navigate to={'/'} />
     }
 
-
     return (
-        <div></div>
+        <>
+            <Helmet>
+                <title>Login | WikiMovie</title>
+                <meta name='description' content='WikiMovie Login Page' />
+            </Helmet>
+            <div></div>
+        </>
     )
 }
 

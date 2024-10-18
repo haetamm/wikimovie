@@ -4,10 +4,10 @@ import { openModal } from "../../../store/modalSlice";
 import { sizeModal, typeModal } from "../../../utilities/constant";
 
 interface CardImageProps {
-    poster_path: string;
-    id: number;
-    activeIndex: number | null;
-    setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  poster_path: string;
+  id: number;
+  activeIndex: number | null;
+  setActiveIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const CardImage = ({ poster_path, id, activeIndex, setActiveIndex }: CardImageProps) => {

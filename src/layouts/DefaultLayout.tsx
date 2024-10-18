@@ -15,7 +15,7 @@ const DefaultLayout = () => {
       </div>
       <Outlet></Outlet>
       <Footer />
-      <Toaster />
+      <Toaster  className="text-lg" position="top-left" />
       <Modal />
     </div>
   )

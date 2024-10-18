@@ -9,7 +9,7 @@ interface FormInputProps {
   
   const FormInput: React.FC<FormInputProps> = ({ label, type, name, value, onChange, error }) => (
     <>
-      <div className="mb-4">
+      <div className="mb-3">
             <label htmlFor="email" className="block text-gray-700 mb-2">{label}</label>
             <input
                 type={type}
